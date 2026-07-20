@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="StockAllocation.API/StockAllocation.API.csproj" />
+  <Project Path="StockAllocation.Application/StockAllocation.Application.csproj" Id="03e9a9a1-7e90-44f1-a83d-d53a727c4347" />
+  <Project Path="StockAllocation.Domain/StockAllocation.Domain.csproj" Id="5297513d-07a2-405a-accc-eefdae665596" />
+  <Project Path="StockAllocation.Infrastructure/StockAllocation.Infrastructure.csproj" Id="31c50975-64a5-489a-b685-c60e51087dee" />
+</Solution>
