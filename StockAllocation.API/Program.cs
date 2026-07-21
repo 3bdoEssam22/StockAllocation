@@ -1,21 +1,34 @@
 
+using StockAllocation.API.Extension;
+using StockAllocation.Infrastructure;
+
 namespace StockAllocation.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            #region Add services to the container.
+
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+            builder.Services.AddInfrastructure(builder.Configuration);
+
+
+            #endregion
+
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            #region Configure the HTTP request pipeline.
+
+            await app.MigrateDatabaseAsync();
+
+
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
@@ -23,10 +36,9 @@ namespace StockAllocation.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
-
-
             app.MapControllers();
+
+            #endregion
 
             app.Run();
         }

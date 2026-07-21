@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using StockAllocation.Domain.Entities;
 
-namespace StockAllocation.Application.Abstractions.Abstractions
+namespace StockAllocation.Application.Abstractions
 {
     public interface IApplicationDbContext
     {
@@ -15,6 +16,8 @@ namespace StockAllocation.Application.Abstractions.Abstractions
 
         DbSet<Allocation> Allocations { get; }
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);  
+        DatabaseFacade Database { get; }
+
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
