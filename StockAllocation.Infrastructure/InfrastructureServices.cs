@@ -6,7 +6,7 @@ using StockAllocation.Infrastructure.Persistence;
 
 namespace StockAllocation.Infrastructure
 {
-    public static class DependencyInjection
+    public static class InfrastructureServices
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {

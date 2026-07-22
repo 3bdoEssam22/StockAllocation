@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StockAllocation.Domain.Entities
+﻿namespace StockAllocation.Domain.Entities
 {
     public class StockLot
     {

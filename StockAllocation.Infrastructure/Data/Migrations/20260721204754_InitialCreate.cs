@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace StockAllocation.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
@@ -33,8 +35,8 @@ namespace StockAllocation.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Sku = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Sku = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,6 +122,29 @@ namespace StockAllocation.Infrastructure.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "Name", "Sku" },
+                values: new object[,]
+                {
+                    { 1, "Blue Pen", "PEN-001" },
+                    { 2, "Notebook", "NOTE-001" },
+                    { 3, "Company Mug", "MUG-001" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StockLots",
+                columns: new[] { "Id", "BatchCode", "ExpiresOn", "ProductId", "QuantityOnHand" },
+                values: new object[,]
+                {
+                    { 1, "PEN-OLD", new DateOnly(2000, 1, 1), 1, 100 },
+                    { 2, "PEN-A", new DateOnly(2099, 1, 10), 1, 3 },
+                    { 3, "PEN-B", new DateOnly(2099, 2, 10), 1, 5 },
+                    { 4, "NOTE-A", new DateOnly(2099, 1, 5), 2, 2 },
+                    { 5, "NOTE-B", new DateOnly(2099, 3, 1), 2, 10 },
+                    { 6, "MUG-A", new DateOnly(2099, 12, 31), 3, 0 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Allocations_OrderLineId",
                 table: "Allocations",
@@ -145,6 +170,12 @@ namespace StockAllocation.Infrastructure.Data.Migrations
                 name: "IX_Orders_OrderNumber",
                 table: "Orders",
                 column: "OrderNumber",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_Sku",
+                table: "Products",
+                column: "Sku",
                 unique: true);
 
             migrationBuilder.CreateIndex(

@@ -12,8 +12,8 @@ using StockAllocation.Infrastructure.Persistence;
 namespace StockAllocation.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260721035848_SeedingData")]
-    partial class SeedingData
+    [Migration("20260721204754_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

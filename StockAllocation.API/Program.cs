@@ -1,5 +1,6 @@
 
 using StockAllocation.API.Extension;
+using StockAllocation.Application;
 using StockAllocation.Infrastructure;
 
 namespace StockAllocation.API
@@ -16,9 +17,11 @@ namespace StockAllocation.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             builder.Services.AddInfrastructure(builder.Configuration);
-
+            builder.Services.AddApplicationServices(builder.Configuration);
 
             #endregion
 
@@ -32,6 +35,8 @@ namespace StockAllocation.API
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
